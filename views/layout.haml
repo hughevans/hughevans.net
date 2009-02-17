@@ -1,0 +1,34 @@
+!!! Strict
+%html{:xmlns =>'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en', :lang => 'en'}
+
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %title= "#{@single_view ? "#{@article['title']} | " : ''}hughevans.net"
+    %link{:href => '/screen.css', :media => 'screen', :rel => 'stylesheet', :type => 'text/css'}
+    %script{:src => '/javascripts/code_highlighter.js', :type => "text/javascript"}
+    
+  %body
+    #main
+      .wrapper
+        .content
+          #header
+            %h1
+              %a{:href => '/'} hughevans.net
+          = yield
+
+        .sidebar
+          &nbsp;
+
+    #footer
+      .wrapper
+        .content
+          :textile
+            "It's more fun to compute"
+          / %ul
+          /   %li foo
+          /   %li bar
+          /   %li foo
+          /   %li bar
+        .sidebar
+          &nbsp;
+        .clearfix

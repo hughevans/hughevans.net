@@ -1,0 +1,73 @@
+/ Date Range String Conversions
+
+:textile
+  It has been widely publicised that you should use string conversions to display dates and times in rails, but there is another object type that can make use of these handy conversions and that is date ranges. I honestly didn't realise Ruby had date ranges until recently and I have to say they are pretty cool. Anyway onto my first date range conversion:
+
+%code.ruby
+  %pre
+    :preserve
+      ActiveSupport::CoreExtensions::Range::Conversions::RANGE_FORMATS.merge!(
+        :long => Proc.new { |start, stop| "\#{start.to_date.to_s(:dmy_long)} to \#{stop.to_date.to_s(:dmy_long)}" }
+      )
+
+:textile
+  Using a Proc you can pick up on the first and last date from the range and concatenate them into the string format of your choosing. I've used a date string conversion there aswell:
+
+%code.ruby
+  %pre
+    :preserve
+      ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
+        :dmy_long => Proc.new { |date| "\#{date.day.ordinalize} \#{date.strftime '%B %Y'}" }
+      )
+
+:textile
+  With these conversions loaded you can do the following:
+
+%code.shell
+  %pre
+    :preserve
+      >> date_range = 20.days.from_now..30.days.from_now
+      => Wed, 15 Oct 2008 11:09:03 UTC +00:00..Sat, 25 Oct 2008 11:09:03 UTC +00:00
+      >> date_range.to_s(:long)
+      => "15th October 2008 to 25th October 2008"
+
+:textile
+  Pretty nice but if you want to make it a little dry-er in terms of the output like '15-25th October 2008' you could do something like this:
+
+%code.ruby
+  %pre
+    :preserve
+      ActiveSupport::CoreExtensions::Range::Conversions::RANGE_FORMATS.merge!(
+        :condensed => Proc.new do |start, stop|
+          if (start.year == stop.year) and (start.month == stop.month)
+            "\#{start.day}-\#{stop.to_date.to_s(:dmy_long)}"
+          else
+            "\#{start.to_date.to_s(:dmy_long)} to \#{stop.to_date.to_s(:dmy_long)}"
+          end
+        end
+      )
+
+:textile
+  So when the date range is limited to the one month it will give you the condensed version:
+
+%code.shell
+  %pre
+    :preserve
+      >> date_range = 20.days.from_now..30.days.from_now
+      => Wed, 15 Oct 2008 11:35:13 UTC +00:00..Sat, 25 Oct 2008 11:35:13 UTC +00:00
+      >> date_range.to_s(:condensed)
+      => "15-25th October 2008"
+
+:textile
+  And if the range spans more than one month it jumps back to the full version:
+
+%code.shell
+  %pre
+    :preserve
+      >> date_range = 20.days.from_now..50.days.from_now
+      => Wed, 15 Oct 2008 11:35:22 UTC +00:00..Fri, 14 Nov 2008 11:35:22 UTC +00:00
+      >> date_range.to_s(:condensed)
+      => "15th October 2008 to 14th November 2008"
+
+:textile
+  Of course don't forget the more logic you put in these conversions the greater the need for some tests.

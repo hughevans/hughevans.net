@@ -1,0 +1,11 @@
+.article
+  %h1.title
+    - if @single_view
+      = @article['title']
+    - else
+      %a{:href => "#{Date.parse(@article['published']).strftime("%Y/%m/%d")}/#{@article['slug']}"}
+        = @article['title']
+  .published
+    Published:
+    = Date.parse(@article['published']).strftime("%B %d, %Y")
+  = article @article
