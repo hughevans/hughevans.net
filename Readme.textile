@@ -10,3 +10,5 @@ MIT license except for the files found in:
 
 * @/articles/@
 * @/public/images/@
+
+They are copyright Hugh Evans.
