@@ -1,0 +1,52 @@
+-# title: Enter Sinatra
+-# published: 2009-02-21
+
+:textile
+  "Sinatra":http://www.sinatrarb.com/, I absolutely love it. After watching "toolmantim":http://toolmantim.com/ present on the topic at the last RORO I borrowed some inspiration (and "some code":http://github.com/toolmantim/toolmantim/tree/master) and came up with the new "hughevans.net":http://hughevans.net.
+
+%pre
+  %code.ruby<
+    :preserve
+      require 'rubygems'
+      require 'sinatra'
+      require 'haml'
+      require 'time'
+      require 'lib/article'
+
+      BASE_DOMAIN = 'http://hughevans.net'
+
+      Article.path = File.join(Sinatra::Application.root, 'articles')
+
+      helpers do
+        def article_body(article)
+          haml(article.template, :layout => false)
+        end
+
+        def article_path(article)
+          "/\#{article.published.strftime("%Y/%m/%d")}/\#{article.slug}"
+        end
+      end
+
+      get '/' do
+        @articles = Article.all.sort
+        haml :home
+      end
+
+      get '/:year/:month/:day/:slug' do
+        @article = Article[params[:slug]] || raise(Sinatra::NotFound)
+        @single_view = true
+        haml :article
+      end
+
+      get '/articles.atom' do
+        content_type 'application/atom+xml'
+        haml :feed, :layout => false
+      end
+
+      get '/:style.css' do
+        content_type 'text/css', :charset => 'utf-8'
+        sass :"stylesheets/\#{params[:style]}"
+      end
+
+:textile
+  Nothing too clever, just simple clean ruby code. The full source is available on "GitHub":http://github.com/artpop/hughevans.net/tree/master.

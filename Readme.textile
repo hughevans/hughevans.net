@@ -1,0 +1,12 @@
+h1. hughevans.net
+
+_A Tiny Sinatra Blog_
+
+My take on a tiny Sinatra blog, with inspiration (and a fair chunk of code) coming from "toolmantim":http://github.com/toolmantim/toolmantim/tree/master.
+
+h2. License
+
+MIT license except the files found in:
+
+* @/articles/@
+* @/public/images/@

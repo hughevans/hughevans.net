@@ -8,16 +8,10 @@ body
   font-size: 14px
   
 .wrapper
-  width: 950px
+  width: 800px
   margin: 0 auto
   padding: 0
   text-align: left
-    
-.content
-  width: 950px
-  float: left
-  margin: 0
-  padding: 0
   
 a
   color: #c31c1c
@@ -33,16 +27,16 @@ p
 pre
   background-color: #232323
   border: 1px solid black
-  font-family: 'Monaco', 'Courier New', 'Terminal', monospace
   padding: 10px
-  font-size: 12px
   margin: 20px 0 30px
   overflow: auto
-code
+pre, code
+  font-family: 'Monaco', 'Courier New', 'Terminal', monospace
+  font-size: 12px
   color: #e6e0db
 
 .article
-  margin: 20px 0 40px
+  margin: 0 0 40px
   h1
     font-size: 26px
     &.title
@@ -57,63 +51,50 @@ code
     margin: 0 0 15px 0
     font-weight: bold
 
-.snapshot
-  text-align: center
-
-.sidebar
-  display: none
-/  width: 250px
-/  float: right
-/  margin: 20px 0 0
-/  padding: 0
-
 #main 
   margin: 0
   padding: 0
-  .content
-    margin: 0
 
 #header
-  margin: 30px 0
+  padding: 20px 0 0
+  height: 80px
+  background: url('/images/ruby_art_and_all_things.png') right top no-repeat
   h2
     font-size: 22px
-  .tagline
-    font-family: 'Courier New', 'Terminal', monospace
-    margin: 0 0 15px 0
-    font-size: 12px
-    color: #c31c1c
 
 #footer
   clear: both
   background-color: #000
   color: #e6e0db
-  .content
-    ul
-      margin: 48px 0
-      padding: 0
-    li
-      margin: 0
-      padding: 0
-      display: inline
-      list-style-image: none
-      list-style-position: outside
-      list-style-type: none
-    li:after
-      content: "' | '"
-      color: #DBDADB
-    li:last-child:after
-      content: "''"
-    a
-      color: #e6e0db
-      text-decoration: underline
-    a:hover
-      color: #c31c1c
-  .sidebar
+  padding: 20px 0
+  .wrapper
+    text-align: right
+  a
+    color: #e6e0db
+    text-decoration: underline
+    font-weight: normal
+  a:hover
+    color: #c31c1c
+  ul
     margin: 0
+    padding: 0 0 0 5px
+    display: inline
+  li
+    margin: 0
+    padding: 0
+    display: inline
+    list-style-image: none
+    list-style-position: outside
+    list-style-type: none
+  li:after
+    content: " | "
+    color: #DBDADB
+  li:last-child:after
+    content: ""
 
 .clearfix
   clear: both
-  
+
 a img
   border: 0
 

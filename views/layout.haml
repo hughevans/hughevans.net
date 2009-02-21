@@ -3,32 +3,26 @@
 
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
-    %title= "#{@single_view ? "#{@article['title']} | " : ''}hughevans.net"
+    %title= "#{"#{@article.title} | " if @single_view }hughevans.net"
     %link{:href => '/screen.css', :media => 'screen', :rel => 'stylesheet', :type => 'text/css'}
     %script{:src => '/javascripts/code_highlighter.js', :type => "text/javascript"}
     
   %body
     #main
       .wrapper
-        .content
-          #header
-            %h1
-              %a{:href => '/'} hughevans.net
-          = yield
-
-        .sidebar
-          &nbsp;
+        #header
+          %h1
+            %a{:href => '/'} @hughevans
+        = yield
 
     #footer
       .wrapper
-        .content
-          :textile
-            "It's more fun to compute"
-          / %ul
-          /   %li foo
-          /   %li bar
-          /   %li foo
-          /   %li bar
-        .sidebar
-          &nbsp;
-        .clearfix
+        %strong
+          my other stuff on the web
+        %ul
+          %li
+            %a{:href => 'http://twitter.com/hughevans'} twitter
+          %li
+            %a{:href => 'http://flickr.com/photos/hughevans/'} flickr
+          %li
+            %a{:href => 'http://github.com/artpop'} github

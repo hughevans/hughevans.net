@@ -1,3 +1,2 @@
-- ARTICLES.each do |a|
-  - @article = a[1]
+- for @article in @articles
   = haml(:article, :layout => false)
