@@ -6,7 +6,7 @@ My take on a tiny Sinatra blog, with inspiration (and a fair chunk of code) comi
 
 h2. License
 
-MIT license except the files found in:
+MIT license except for the files found in:
 
 * @/articles/@
 * @/public/images/@

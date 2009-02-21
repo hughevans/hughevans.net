@@ -64,4 +64,8 @@ class Article
   def template_variable(name)
     self.class.template_variable(self.template, name)
   end
+  
+  def <=>(other)
+    [other.published.year, other.published.month, other.published.day] <=> [self.published.year, self.published.month, self.published.day]
+  end
 end

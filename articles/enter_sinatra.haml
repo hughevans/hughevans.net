@@ -13,8 +13,6 @@
       require 'time'
       require 'lib/article'
 
-      BASE_DOMAIN = 'http://hughevans.net'
-
       Article.path = File.join(Sinatra::Application.root, 'articles')
 
       helpers do
@@ -23,22 +21,23 @@
         end
 
         def article_path(article)
-          "/\#{article.published.strftime("%Y/%m/%d")}/\#{article.slug}"
+          "/\#{article.published.strftime("%Y/%m/%d")}/\#{article.id}"
         end
       end
 
       get '/' do
-        @articles = Article.all.sort
+        @articles = Article.all[0..4].sort
         haml :home
       end
 
-      get '/:year/:month/:day/:slug' do
-        @article = Article[params[:slug]] || raise(Sinatra::NotFound)
+      get '/:year/:month/:day/:id' do
+        @article = Article[params[:id]] || raise(Sinatra::NotFound)
         @single_view = true
         haml :article
       end
 
       get '/articles.atom' do
+        @articles = Article.all.sort
         content_type 'application/atom+xml'
         haml :feed, :layout => false
       end
