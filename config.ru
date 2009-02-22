@@ -1,10 +1,11 @@
 require 'rubygems'
 require 'vendor/sinatra/lib/sinatra.rb'
 
-Sinatra::Application.default_options.merge!(
+Sinatra::Application.set(
   :run => false,
-  :env => :production
+  :environment => 'production',
+  :views => '/home/hughevans/hughevans.net/current/views'
 )
 
 require 'hughevans.rb'
-run Sinatra.application
+run Sinatra::Application
