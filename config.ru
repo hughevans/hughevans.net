@@ -1,6 +1,6 @@
 require 'rubygems'
-require 'vendor/rack/rack'
-require 'vendor/sinatra/lib/sinatra.rb'
+require 'vendor/rack/lib/rack'
+require 'vendor/sinatra/lib/sinatra'
 
 disable :run
 set :app_file, 'hughevans.rb'
