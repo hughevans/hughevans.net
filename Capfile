@@ -16,11 +16,11 @@ set :use_sudo,          false
 
 server domain, :app, :web
 
-after 'deploy:setup',       'rack:install'
-after 'deploy:update_code', 'rack:symlink'
+after 'deploy:setup',       'vendor_gems:install_and_unpack'
+after 'deploy:update_code', 'vendor_gems:symlink'
 
-namespace :rack do
-  task :install do
+namespace :vendor_gems do
+  task :install_and_unpack do
     run 'gem install sinatra -v 0.9.0.4' # Also installs rack 0.9.1
     run "cd #{shared_path}/system && gem unpack rack && mv rack-* rack"
     run "cd #{shared_path}/system && gem unpack sinatra && mv sinatra-* sinatra"

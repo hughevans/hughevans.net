@@ -1,0 +1,46 @@
+-# title: Sinatra 0.9 on Dreamhost
+-# published: 2009-02-22
+
+:textile
+  There is "lots":http://www.sinatrarb.com/book.html#deployment of "good":http://railstips.org/2008/12/15/deploying-sinatra-on-dreamhost-with-passenger information out there on how to deploy Sinatra apps to Dreamhost but they don't really cover off the Sinatara 0.9 release which unfortunately depends on a newer version of the Rack gem that dreamhost does not yet have installed. The "missing piece of the puzzle":http://brianc.me/blog/sinatra-on-dreamhost/ was that you can actually override the Rack that Passenger loads by vendoring Rack and requiring it in your config.ru file.
+
+%pre
+  %code.ruby<
+    :preserve
+      require 'rubygems'
+      require 'vendor/rack/lib/rack'
+      require 'sinatra'
+
+      disable :run
+
+      set :app_file, 'yourapp.rb'
+      set :views,    '/full/path/views'
+
+      require 'yourapp'
+      run Sinatra::Application
+
+:textile
+  Now just to tidy things up and prevent me from having junk in my repository I updated my Capistrano script to gem install Sinatra/Rack and unpack them to /vendor on deploy:setup.
+
+%pre
+  %code.ruby<
+    :preserve
+      after 'deploy:setup',       'vendor_gems:install_and_unpack'
+      after 'deploy:update_code', 'vendor_gems:symlink'
+
+      namespace :vendor_gems do
+        task :install_and_unpack do
+          run 'gem install sinatra -v 0.9.0.4' # Also installs rack 0.9.1
+          run "cd \#{shared_path}/system && gem unpack rack && mv rack-* rack"
+          run "cd \#{shared_path}/system && gem unpack sinatra && mv sinatra-* sinatra"
+        end
+
+        task :symlink do
+          run "mkdir -p \#{release_path}/vendor/"
+          run "ln -nfs \#{shared_path}/system/rack \#{release_path}/vendor/rack"
+          run "ln -nfs \#{shared_path}/system/sinatra \#{release_path}/vendor/sinatra"
+        end
+      end
+
+:textile
+  Now I am a pretty happy camper as my move back to shared hosting seems to be going quite well so far. Thanks "Passenger":http://www.modrails.com/!
