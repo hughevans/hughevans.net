@@ -1,11 +1,10 @@
 require 'rubygems'
+require 'vendor/rack/rack'
 require 'vendor/sinatra/lib/sinatra.rb'
 
-Sinatra::Application.set(
-  :run => false,
-  :environment => 'production',
-  :views => '/home/hughevans/hughevans.net/current/views'
-)
+disable :run
+set :app_file, 'hughevans.rb'
+set :views, File.dirname(__FILE__) + '/views'
 
-require 'hughevans.rb'
+require 'hughevans'
 run Sinatra::Application
