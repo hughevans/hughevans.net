@@ -4,6 +4,7 @@
 :textile
   I often like to have small form actions in my sidebar hidden away with javascript that are just a toggle away. Using jQuery to do this is quite easy but there are a few gotchas. Firstly we want both the always visible toggler link and a cancel button inside the toggled div to do the toggling. Next we want the first form input in the toggled div to become focused when we make it visible. It is important we don't try and do this when we are toggling the div off (hiding it) as Internet Explorer will bork when you try and focus on a hidden element.
 
+:textile
   Starting with our HTML:
 
 %pre
@@ -56,4 +57,4 @@
 :textile
   The sense in this is that I traverse up to the parent div '.toggle' before filtering down to '.togglable', this way I can click both the 'h2 a' and the '.togglable a' to get the same effect. Also then I make sure that I don't try and focus on a hidden element because just doing 'input:visible:enabled:first' won't check if any of it's parents are hidden.
 
-  See the "Demo Page":http://hughevans.net/jquery_toggler.html.
+- #See the "Demo Page":http://hughevans.net/jquery_toggler.html.
