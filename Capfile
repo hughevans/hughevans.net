@@ -20,27 +20,25 @@ set :use_sudo,          false
 
 server domain, :app, :web
 
-require 'erb'
+config_rackup = <<-eos
+  require 'rubygems'
+  require 'vendor/rack/lib/rack'
+  require 'vendor/sinatra/lib/sinatra'
 
-config_rackup = ERB.new <<-EOF
-require 'rubygems'
-require 'vendor/rack/lib/rack'
-require 'vendor/sinatra/lib/sinatra'
+  disable :run
+  set :app_file, 'hughevans.rb'
+  set :views,    '#{deploy_to}/current/views'
 
-disable :run
-set :app_file, 'hughevans.rb'
-set :views,    '#{deploy_to}/current/views'
-
-require 'hughevans'
-run Sinatra::Application
-EOF
+  require 'hughevans'
+  run Sinatra::Application
+eos
 
 after 'deploy:setup',       'rackup:create_config'
 after 'deploy:update_code', 'rackup:symlink'
 
 namespace :rackup do
   task :create_config do
-    put config_rackup.result, "#{shared_path}/system/config.ru"
+    put config_rackup, "#{shared_path}/system/config.ru"
   end
   
   task :symlink do
