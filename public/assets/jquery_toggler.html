@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>jQuery Toggler</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
+    <style type="text/css">
+      body {
+        background: #FFF;
+        color: #000000;
+        margin: 40px 20px;
+        padding: 0;
+        text-align: center;
+        font-family: helvetica, arial, sans-serif;
+        font-size: 14px; }
+      #sidebar {
+        width: 270px;
+        margin: 10px auto;
+        text-align: left; }
+      a {
+        color: #1d3350; }
+      h2 {
+        font-family: 'trebuchet ms', sans-serif;
+        margin: 0 0 5px;
+        padding: 0;
+        line-height: 32px;
+        font-size: 22px; }
+      div.toggle {
+        padding: 0 10px;
+        margin: 20px 0;
+        border: 1px solid #ccc; }
+    </style>
+    <script type="text/javascript">
+      
+      ////
+      // Behaviours
+      $(document).ready(function() {
+
+        ////
+        // Automatically hide all togglable elements on load
+        $('.togglable').hide();
+        
+        ////
+        // Toggle a .togglable div inside the clicked parent .toggle div
+        $('a.toggler').click(function() {
+          var togglable = $(this).parents('.toggle').children('.togglable')
+          togglable.toggle();
+          if(togglable.is(':visible')) {
+            togglable.find('input:visible:enabled:first').focus();
+          };
+          return false;
+        });
+        
+      });
+      
+    </script>
+  </head>
+  <body>
+    <div id="sidebar">
+      <div class="toggle">
+        <h2><a href="#new_category" class="toggler">Create New Category</a></h2>
+        <div class="togglable">
+          <form action="/" method="post">
+            <p>
+              <label for="category_name">Name: </label>
+              <input id="category_name" name="category[name]" size="20" type="text" />
+            </p>
+            <p>
+              <input id="category_submit" name="commit" type="submit" value="Create Category" />
+              or
+              <a href="#" class="toggler">Cancel</a>
+            </p>
+          </form>
+        </div>
+      </div>
+      <div class="toggle">
+        <h2><a href="#new_category" class="toggler">Edit Quantity</a></h2>
+        <div class="togglable">
+          <form action="/" method="post">
+            <p>
+              <label for="quantity">Quantity: </label>
+              <input id="quantity" name="quantity" size="4" type="text" value="8"/>
+            </p>
+            <p>
+              <input id="quantity_submit" name="commit" type="submit" value="Update Quantity" />
+              or
+              <a href="#" class="toggler">Cancel</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
