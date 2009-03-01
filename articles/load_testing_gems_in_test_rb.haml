@@ -1,0 +1,16 @@
+-# title: Load Testing Gems in test.rb
+-# published: 2009-03-01
+
+:textile
+  Just a quick tip. Don't load gems that you only require for testing purposes in your Rails environment.rb. Put them in your test.rb instead, like so:
+
+%pre
+  %code.ruby<
+    :preserve
+      config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :source => 'http://gems.github.com'
+
+:textile
+  This works fine and will give you the added advantage of shaving off a few fractions from your production start up time.
+
+:textile
+  Start up time is something of which I have become very sensitive to lately due to way Dreamhost kills of idle Passenger processes rather quickly. So if you too are hosting with Passenger pay careful attention to the start up time of your application.
