@@ -1,0 +1,28 @@
+-# title: Active Record Association Methods
+-# published: 2009-03-06
+
+:textile
+  I often forget that you can define methods for an Active Record associations in a block after the association declaration like so:
+
+%pre
+  %code.ruby<
+    :preserve
+      class Order < ActiveRecord::Base
+        has_many :items, :dependent => :destroy do
+          def total
+            inject(0) {|sum, s| sum += s.price}
+          end
+        end
+      end
+
+%pre
+  %code.ruby<
+    :preserve
+      >> @order = Order.last
+      >> @order.items.total
+      => 27.45
+
+:textile
+  Most of the time this makes more sense than defining them as instance methods in the parent model and much more sense than class methods in the child because it will require the association to work anyhow (perhaps though I haven't chosen the best example to illustrate this as you could potentially use an Item.total method independently eg. Item.all.total, but you get the picture).
+
+
