@@ -1,0 +1,39 @@
+-# title: Sphinx on Dreamhost
+-# published: 2009-03-10
+
+:textile
+  If you wish to to install the "Sphinx":http://sphinxsearch.com/ search engine on Dreamhost, you can and it is really quite easy and painless.
+
+:textile
+  The first step is to download and compile sphinx into your home directory (as you do not have permissions to install this elsewhere):
+
+%pre
+  %code<
+    :preserve
+      cd ~/
+      mkdir -p local
+      wget http://sphinxsearch.com/downloads/sphinx-0.9.8.1.tar.gz
+      tar -xzf sphinx-0.9.8.1.tar.gz
+      cd sphinx-0.9.8.1/
+      ./configure --prefix=$HOME/local/ --exec-prefix=$HOME/local/
+      make
+      install
+
+:textile
+  Now you simply need to modify our $PATH to include ~/local/bin:
+
+%pre
+  %code<
+    :preserve
+      echo "export PATH=\"$PATH:~/local/bin\"" >> ~/.bash_profile
+
+:textile
+  Now you should have a working searchd and your only remaining concern is how to keeping it running, as Dreamhost will kill off long running processes. My solution was to add it to crontab:
+
+%pre
+  %code<
+    :preserve
+      0 3 * * * searchd --config /home/you/path/sphinx.conf
+
+:textile
+  This appears to be "a grey area":http://blog.dreamhosters.com/kbase/index.cgi?area=2449 with Dreamhost, but I've never really seen sphinx use any real CPU or memory (on my sites at least) and personally I think they should make it available as part of their standard build.

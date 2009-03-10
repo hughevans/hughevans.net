@@ -23,7 +23,7 @@ helpers do
 end
 
 get '/' do
-  @articles = Article.all[0..4].sort
+  @articles = Article.all.sort[0..7]
   haml :home
 end
 
