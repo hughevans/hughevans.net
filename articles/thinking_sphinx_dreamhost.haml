@@ -20,12 +20,13 @@
       install
 
 :textile
-  Now you simply need to modify our $PATH to include ~/local/bin:
+  Now you simply need to modify your $PATH to include ~/local/bin:
 
 %pre
   %code<
     :preserve
       echo "export PATH=\"$PATH:~/local/bin\"" >> ~/.bash_profile
+      source ~/.bash_profile
 
 :textile
   Now you should have a working searchd and your only remaining concern is how to keeping it running, as Dreamhost will kill off long running processes. My solution was to add it to crontab:
