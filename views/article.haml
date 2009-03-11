@@ -1,11 +1,5 @@
-.article
-  %h1.title
-    - if @single_view
-      = @article.title
-    - else
-      %a{:href => article_path(@article)}
-        = @article.title
-  .published
-    Published:
-    = @article.published.strftime("%B %d, %Y")
-  = article_body(@article)
+= haml(:_article, :layout => false)
+
+#disqus_thread
+
+%script{:type => 'text/javascript', :src => 'http://disqus.com/forums/hughevans/embed.js'}

@@ -1,0 +1,11 @@
+.article
+  %h1.title
+    - if @single_view
+      = @article.title
+    - else
+      %a{:href => article_path(@article)}
+        = @article.title
+  .published
+    Published:
+    = @article.published.strftime("%B %d, %Y")
+  = article_body(@article)
