@@ -34,7 +34,7 @@
 %pre
   %code<
     :preserve
-      0 3 * * * searchd --config /home/you/path/sphinx.conf
+      * * * * * /home/you/local/bin/searchd --config /home/you/path/sphinx.conf
 
 :textile
   This appears to be "a grey area":http://blog.dreamhosters.com/kbase/index.cgi?area=2449 with Dreamhost, but I've never really seen sphinx use any real CPU or memory (on my sites at least) and personally I think they should make it available as part of their standard build.
