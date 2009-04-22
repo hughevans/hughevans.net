@@ -2,7 +2,7 @@
 -# published: 2009-04-22
 
 :textile
-  On almost every rails project I work on I end up needing to mixin some helper methods and almost always I'm in need of the h method (escape_html) from the stdlib ("ERB::Util":http://www.ruby-doc.org/stdlib/libdoc/erb/rdoc/classes/ERB/Util.html). You do however need to take caution when using this type of mixin as in needs to be included only after the protected declaration.
+  On almost every rails project I work on I end up needing to mixin some helper methods for the controllers and almost always I'm in need of the h method (escape_html) from the stdlib ("ERB::Util":http://www.ruby-doc.org/stdlib/libdoc/erb/rdoc/classes/ERB/Util.html). You do however need to take caution when using this type of mixin as it only to be included only after the protected declaration.
 
 %pre
   %code.ruby<
@@ -24,4 +24,4 @@
       map.connect ':controller/:action/:id'
 
 :textile
-  Removing these routes and relying on implicit routes, hopefully restful, is the way to go anyhow and thus removes the above stated danger. Nevertheless it's best practice to protect these mixin methods regardless and if you do have a rails app that has an ':action' you'll want to make extra sure of it.
+  Removing these routes and relying on implicit routes, hopefully restful, is the way to go anyhow and thus removes the above stated danger. Nevertheless it's best practice to protect these mixin methods regardless and if you do have a rails app that has an '/:action' route you'll want to make extra sure of it.
