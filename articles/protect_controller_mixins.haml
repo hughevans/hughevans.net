@@ -1,0 +1,27 @@
+-# title: Protect Controller Mixins
+-# published: 2009-04-22
+
+:textile
+  On almost every rails project I work on I end up needing to mixin some helper methods and almost always I'm in need of the h method (escape_html) from the stdlib ("ERB::Util":http://www.ruby-doc.org/stdlib/libdoc/erb/rdoc/classes/ERB/Util.html). You do however need to take caution when using this type in mixin in a rails controller, be sure to include it after protected declaration.
+
+%pre
+  %code.ruby<
+    :preserve
+      class ApplicationController < ActionController::Base
+        
+        protected
+
+        include ERB::Util # Don't even do this above protected!
+      end
+
+:textile
+  The reason being is that any instance methods in the mixin will become accessible as controller actions with the default rails routes.
+
+
+%pre
+  %code.ruby<
+    :preserve
+      map.connect ':controller/:action/:id'
+
+:textile
+  Removing these routes and relying on implicit routes, hopefully restful, is the way to go anyway.
