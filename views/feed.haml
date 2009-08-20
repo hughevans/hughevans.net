@@ -1,8 +1,8 @@
 !!! xml
-%feed{:xmlns => 'http://www.w3.org/2005/Atom'}
+%feed(xmlns='http://www.w3.org/2005/Atom')
  
   %title @hughevans - Ruby, Art and All things...
-  %link{:href => 'http://hughevans.net', :rel => 'self', :hreflang => 'en', :type => 'application/atom+xml'}
+  %link(href='http://hughevans.net' rel='self' hreflang='en' type='application/atom+xml')
    
   %author
     %name Hugh Evans
@@ -17,6 +17,6 @@
       %title= article.title
       %published= article.published.xmlschema
       %updated= article.last_modified.xmlschema
-      %link{:href => "http://hughevans.net#{article_path(article)}", :rel => 'alternate', :hreflang => 'en', :type => 'text/html'}
-      %content{:type => 'xhtml', 'xml:lang' => 'en', 'xml:base'=>'http://hughevans.net/'}
-        %div{:xmlns => 'http://www.w3.org/1999/xhtml'}= absoluteify_links(article_body(article))
+      %link(href="http://hughevans.net#{article_path(article)}" rel='alternate' hreflang='en' type='text/html')
+      %content(type='xhtml' xml:lang='en' xml:base='http://hughevans.net/')
+        %div(xmlns='http://www.w3.org/1999/xhtml')= absoluteify_links(article_body(article))

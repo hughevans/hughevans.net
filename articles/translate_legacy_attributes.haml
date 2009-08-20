@@ -1,0 +1,42 @@
+-# title: Translate Legacy Attribute Names
+-# published: 2009-08-20
+
+:textile
+  Recently I've been working a lot with legacy databases, wrapping them with rails apps and exposing them to REST actions. One thing that annoyed me was the terribly inconsistent column naming conventions I came across. I used *alias_attribute* to give them nicer names, but when it came to running *to_xml* on the models I found I needed to specify which attributes to leave out and use the alias's instead. Not so dry. So this is what I came up with:
+
+%pre
+  %code.ruby<
+    :preserve
+      class Candidate < Legacy::Base
+        set_table_name  'CandidateData'
+        set_primary_key 'Fileno'
+
+        @@translations = {
+          'Fileno'     => 'id',
+          'Familyname' => 'last_name',
+          'GivenNames' => 'first_name',
+          'DOB'        => 'date_of_birth',
+          'Emailaddr'  => 'email',
+          'Address'    => 'address',
+          'City'       => 'city',
+          'State'      => 'state',
+          'PostCode'   => 'postal_code',
+          'PhoneHome'  => 'phone_home',
+          'PhoneWork'  => 'phone_work',
+          'mobile'     => 'phone_mobile'
+        }
+
+        @@translations.each {|k,v| alias_attribute(v, k)}
+
+        alias_method :ar_to_xml, :to_xml
+
+        def to_xml
+          ar_to_xml(
+            :except  => @@translations.keys,
+            :methods => @@translations.values
+          )
+        end
+      end
+
+:textile
+  Also you only have to translate the attributes that need it as they will come through to *to_xml* as normal if not included in the translation hash.
