@@ -24,6 +24,7 @@ config_rackup = <<-eos
   require 'rubygems'
   require 'vendor/rack/lib/rack'
   require 'vendor/sinatra/lib/sinatra'
+  require 'vendor/haml/lib/haml'
 
   disable :run
   set :app_file, 'hughevans.rb'
@@ -52,14 +53,17 @@ after 'deploy:update_code', 'vendor_gems:symlink'
 namespace :vendor_gems do
   task :install_and_unpack do
     run 'gem install sinatra -v 0.9.0.4' # Also installs rack 0.9.1
+    run 'gem install haml -v 2.2.2'
     run "cd #{shared_path}/system && gem unpack rack -v 0.9.1 && mv rack-0.9.1 rack"
     run "cd #{shared_path}/system && gem unpack sinatra -v 0.9.0.4 && mv sinatra-0.9.0.4 sinatra"
+    run "cd #{shared_path}/system && gem unpack haml -v 2.2.2 && mv haml-2.2.2 haml"
   end
 
   task :symlink do
     run "mkdir -p #{release_path}/vendor/"
     run "ln -nfs #{shared_path}/system/rack #{release_path}/vendor/rack"
     run "ln -nfs #{shared_path}/system/sinatra #{release_path}/vendor/sinatra"
+    run "ln -nfs #{shared_path}/system/haml #{release_path}/vendor/haml"
   end
 end
 
