@@ -1,0 +1,21 @@
+-# title: Homebrew, FreeTDS and RubyODBC
+-# published: 2009-11-05
+
+:textile
+  "Homebrew":http://github.com/mxcl/homebrew is awesome. On my new macbook I elected to use it in place of MacPorts and now I'm in love. I don't want to give you too much in the way of a sales pitch but all I'll say is that I feel I'm now that much closer to The Perfect Setup™ (Along with "RVM":http://rvm.beginrescueend.com which is awesome as well).
+
+  One thing I used Homebrew for was installing the packages required to get my Rails app talking to SQL Server. There already existed a formula for UnixODBC, but I had to write ones for FreeTDS and RubyODBC which was "simple":http://github.com/artpop/homebrew/commit/acd8ccdb40f183d29e5e7c443d4d54fb04af4f3c "enough":http://github.com/artpop/homebrew/commit/3387cd5a6c609d1ed24669adf4a0728c95befd5f (hopefully these will get pulled upstream soon).
+
+  After this getting ODBC to work was a simple matter of:
+
+%pre
+  %code<
+    :preserve
+      brew install unixodbc
+      brew install freetds
+      brew install ruby-odbc
+    
+      Configure ~/.freetds.conf and ~/.odbc.ini
+
+:textile
+  Combine this with the awesome "activerecord-sqlserver-adapter":http://github.com/rails-sqlserver/2000-2005-adapter/ and it all works a charm. I should also add that this is on Snow Leopard, hence the need for UnixODBC.
