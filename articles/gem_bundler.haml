@@ -26,3 +26,6 @@
 
 :textile
   Otherwise Bundler will look for updated gems and download them when you have not locked your Gemfile gems to specific versions. Stinging you big time, especially when APIs change on point releases..
+
+:textile
+  Anyhow, the reason you would want to do this as opposed to just checking in the whole vendor/bundler_gems dir is that you won't dirty up you history with thousand line commits when upgrading gems.
