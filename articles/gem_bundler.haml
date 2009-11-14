@@ -1,0 +1,28 @@
+-# title: Handling Deploys with Gem Bundler
+-# published: 2009-11-14
+
+:textile
+  The best method of usage for "Gem Bundler":http://litanyagainstfear.com/blog/2009/10/14/gem-bundler-is-the-future/ we have found is to check in only your Gemfile and the gem cache dir, ignoring the rest in .gitignore:
+
+%pre
+  %code<
+    :preserve
+      vendor/bundler_gems/*
+      vendor/bundler_gems/!cache
+
+:textile
+  Now we have our known working .gem files checked in we can ensure that on deploy only these will be used on the server by passing Bundler the cached flag when deploying with capistrano:
+
+%pre
+  %code.ruby<
+    :preserve
+      after 'deploy:update_code', 'gems:bundle'
+
+      namespace :gems do
+        task :bundle, :roles => :app do
+          run "cd \#{release_path} && gem bundle --cached"
+        end
+      end
+
+:textile
+  Otherwise Bundler will look for updated gems and download them when you have not locked you Gemfile gems to specific versions. Stinging you big time, especially when APIs change on point releases..
