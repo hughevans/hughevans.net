@@ -11,7 +11,7 @@
       vendor/bundler_gems/!cache
 
 :textile
-  Now we have our known working .gem files checked in we can ensure that on deploy only these will be used on the server by passing Bundler the cached flag when deploying with capistrano:
+  Now we have our known working .gem files checked in we can ensure that on deploy only these will be used on the server by passing Bundler the cached flag when deploying with Capistrano:
 
 %pre
   %code.ruby<
@@ -25,4 +25,4 @@
       end
 
 :textile
-  Otherwise Bundler will look for updated gems and download them when you have not locked you Gemfile gems to specific versions. Stinging you big time, especially when APIs change on point releases..
+  Otherwise Bundler will look for updated gems and download them when you have not locked your Gemfile gems to specific versions. Stinging you big time, especially when APIs change on point releases..
