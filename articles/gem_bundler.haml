@@ -7,8 +7,9 @@
 %pre
   %code<
     :preserve
-      vendor/bundler_gems/*
-      vendor/bundler_gems/!cache
+      vendor/bundler_gems/environment.rb
+      vendor/bundler_gems/gems
+      vendor/bundler_gems/specifications
 
 :textile
   Now we have our known working .gem files checked in we can ensure that on deploy only these will be used on the server by passing Bundler the cached flag when deploying with Capistrano:
