@@ -9,7 +9,7 @@ deploy_config = YAML.load(File.read 'deploy.yml')
 set :user,              deploy_config['user']
 set :domain,            deploy_config['domain']
 set :application,       'hughevans.net'
-set :repository,        'git://github.com/artpop/hughevans.net.git'
+set :repository,        'git://github.com/hughevans/hughevans.net.git'
 set :deploy_to,         "/home/#{user}/deployments/#{domain}" 
 set :deploy_via,        :remote_cache
 set :scm,               'git'
