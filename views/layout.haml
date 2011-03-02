@@ -35,3 +35,15 @@
         var pageTracker = _gat._getTracker("UA-7674685-1");
         pageTracker._trackPageview();
       } catch(err) {};
+
+    :javascript
+      (function() {
+        var t = document.createElement('script');
+        t.type = 'text/javascript'; t.async = true;
+        t.id = 'gauges-tracker';
+        t.setAttribute('data-site-id',
+                       '4d6d95d836c9905267000018');
+        t.src = 'http://track.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
