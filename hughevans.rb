@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'time'
-require 'lib/article'
+require './lib/article'
 
 Article.path = File.join(Sinatra::Application.root, 'articles')
 

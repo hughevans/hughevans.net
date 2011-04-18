@@ -1,134 +1,125 @@
 body
-  :background-color #fff
-  :color #000
-  :margin 0
-  :padding 0
-  :text-align center
-  :font-family Helvetica, arial, "sans-serif"
-  :font-size 14px
-  
+  background-color: white
+  color: black
+  margin: 0
+  padding: 0
+  text-align: center
+  font-family: Helvetica, arial, "sans-serif"
+  font-size: 14px
+
 .wrapper
-  :width 800px
-  :margin 0 auto
-  :padding 0
-  :text-align left
-  
+  width: 800px
+  margin: 0 auto
+  padding: 0
+  text-align: left
+
 a
-  :color #c31c1c
-  :text-decoration none
+  color: #c31c1c
+  text-decoration: none
 
 a:hover
-  :text-decoration underline
+  text-decoration: underline
 
 p
-  :line-height 20px
-  :text-align justify
+  line-height: 20px
+  text-align: justify
 
 pre
-  :background-color #232323
-  :border 1px solid black
-  :padding 10px
-  :margin 20px 0 30px
-  :overflow auto
+  background-color: #232323
+  border: 1px solid black
+  padding: 10px
+  margin: 20px 0 30px
+  overflow: auto
+
 pre, code
-  :font-family 'Monaco', 'Courier New', 'Terminal', monospace
-  :font-size 12px
-  :color #e6e0db
+  font-family: "Monaco", "Courier New", "Terminal", monospace
+  font-size: 12px
+  color: #e6e0db
 
 .article
-  :margin 0 0 40px
+  margin: 0 0 40px
   h1
-    :font-size 26px
+    font-size: 26px
     &.title
-      :margin 5px 0
+      margin: 5px 0
       a
-        :color #000
-        :text-decoration underline
+        color: black
+        text-decoration: underline
   h2
-    :font-size 22px
+    font-size: 22px
   .published
-    :font-family 'Courier New', 'Terminal', monospace
-    :margin 0 0 15px 0
-    :font-weight bold
+    font-family: "Courier New", "Terminal", monospace
+    margin: 0 0 15px 0
+    font-weight: bold
 
 #disqus_thread
-  :margin 0 0 40px
+  margin: 0 0 40px
 
-#main 
-  :margin 0
-  :padding 0
+#main
+  margin: 0
+  padding: 0
 
 #header
-  :padding 20px 0 0
-  :height 80px
-  :background url('/images/ruby_art_and_all_things.png') right top no-repeat
+  padding: 20px 0 0
+  height: 80px
+  background: url("/images/ruby_art_and_all_things.png") right top no-repeat
   h2
-    :font-size 22px
+    font-size: 22px
 
 #footer
-  :clear both
-  :background-color #000
-  :color #e6e0db
-  :padding 20px 0
+  clear: both
+  background-color: black
+  color: #e6e0db
+  padding: 20px 0
   .wrapper
-    :text-align right
-  #railsconf
-    :margin-top 20px
+    text-align: right
   a
-    :color #e6e0db
-    :text-decoration underline
-    :font-weight normal
+    color: #e6e0db
+    text-decoration: underline
+    font-weight: normal
   a:hover
-    :color #c31c1c
+    color: #c31c1c
   ul
-    :margin 0
-    :padding 0 0 0 5px
-    :display inline
+    margin: 0
+    padding: 0 0 0 5px
+    display: inline
   li
-    :margin 0
-    :padding 0
-    :display inline
-    :list-style-image none
-    :list-style-position outside
-    :list-style-type none
+    margin: 0
+    padding: 0
+    display: inline
+    list-style-image: none
+    list-style-position: outside
+    list-style-type: none
   li:after
-    :content " | "
-    :color #DBDADB
+    content: " | "
+    color: #dbdadb
   li:last-child:after
-    :content ""
+    content: ""
 
 .clearfix
-  :clear both
+  clear: both
 
 a img
-  :border 0
+  border: 0
 
-/ RUBY / JAVASCRIPT
 code span
   &.comment
-    :color #BC9458
-    :font-style italic
-
+    color: #bc9458
+    font-style: italic
   &.string
-    :color #A5C261
-
+    color: #a5c261
   &.brackets
-
   &.symbol
-    :color #6D9CBE
-
+    color: #6d9cbe
   &.keywords
-    :color #CC7833
+    color: #cc7833
 
 code.html span
   &.tag
-    :color #FFC66D
-
+    color: #ffc66d
   &.attribute
-    :color #FFC66D
-
+    color: #ffc66d
   &.string
-    :color #A5C261
-
+    color: #a5c261
   &.doctype
-  :color #FFC66D
+  color: #ffc66d
