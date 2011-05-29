@@ -1,0 +1,41 @@
+-# title: Tasteful Routes
+-# published: 2011-05-30
+
+:textile
+  I was browsing Github today when I noticed the URL pattern they had employed for "Pull Requests 2.0":https://github.com/blog/712-pull-requests-2-0. The index is at <span class="code">/pulls</span> as you'd expect, however the show action was in the format of <span class="code">/pull/1</span>. Here's an "example":https://github.com/rails/rails/pull/1389. I actually think it's rather nice and reads much nicer than the Rails default of <span class="code">/pulls/1</span>.
+:textile
+  Here is how to corral Rails into giving you these types of links for a collection and a nested collection (excuse the Ruby 1.9 hash syntax):
+
+%pre
+  %code.ruby<
+    :preserve
+        match 'jobs' => 'jobs#index', as: :jobs
+        match 'jobs' => 'jobs#create', via: :post
+
+        resources :job, controller: 'jobs', except: [:index, :create] do
+          match 'items' => 'items#index', as: :items
+          match 'items' => 'items#create', via: :post
+          resources :item, controller: 'items', except: [:index, :create]
+        end
+
+:textile
+  This gives you the following:
+
+%pre
+  %code<
+    :preserve
+      $ rake routes
+               jobs        /jobs(.:format)                      {:action=>"index", :controller=>"jobs"}
+                    POST   /jobs(.:format)                      {:action=>"create", :controller=>"jobs"}
+          job_items        /job/:job_id/items(.:format)         {:action=>"index", :controller=>"job_items"}
+          job_items POST   /job/:job_id/items(.:format)         {:action=>"create", :controller=>"job_items"}
+       new_job_item GET    /job/:job_id/item/new(.:format)      {:action=>"new", :controller=>"items"}
+      edit_job_item GET    /job/:job_id/item/:id/edit(.:format) {:action=>"edit", :controller=>"items"}
+           job_item GET    /job/:job_id/item/:id(.:format)      {:action=>"show", :controller=>"items"}
+                    PUT    /job/:job_id/item/:id(.:format)      {:action=>"update", :controller=>"items"}
+                    DELETE /job/:job_id/item/:id(.:format)      {:action=>"destroy", :controller=>"items"}
+            new_job GET    /job/new(.:format)                   {:action=>"new", :controller=>"jobs"}
+           edit_job GET    /job/:id/edit(.:format)              {:action=>"edit", :controller=>"jobs"}
+                job GET    /job/:id(.:format)                   {:action=>"show", :controller=>"jobs"}
+                    PUT    /job/:id(.:format)                   {:action=>"update", :controller=>"jobs"}
+                    DELETE /job/:id(.:format)                   {:action=>"destroy", :controller=>"jobs"}
