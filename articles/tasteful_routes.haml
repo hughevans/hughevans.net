@@ -25,17 +25,17 @@
   %code<
     :preserve
       $ rake routes
-               jobs        /jobs(.:format)                      {:action=>"index", :controller=>"jobs"}
+               jobs GET    /jobs(.:format)                      {:action=>"index", :controller=>"jobs"}
                     POST   /jobs(.:format)                      {:action=>"create", :controller=>"jobs"}
-          job_items        /job/:job_id/items(.:format)         {:action=>"index", :controller=>"job_items"}
-          job_items POST   /job/:job_id/items(.:format)         {:action=>"create", :controller=>"job_items"}
-       new_job_item GET    /job/:job_id/item/new(.:format)      {:action=>"new", :controller=>"items"}
-      edit_job_item GET    /job/:job_id/item/:id/edit(.:format) {:action=>"edit", :controller=>"items"}
-           job_item GET    /job/:job_id/item/:id(.:format)      {:action=>"show", :controller=>"items"}
-                    PUT    /job/:job_id/item/:id(.:format)      {:action=>"update", :controller=>"items"}
-                    DELETE /job/:job_id/item/:id(.:format)      {:action=>"destroy", :controller=>"items"}
-            new_job GET    /job/new(.:format)                   {:action=>"new", :controller=>"jobs"}
-           edit_job GET    /job/:id/edit(.:format)              {:action=>"edit", :controller=>"jobs"}
                 job GET    /job/:id(.:format)                   {:action=>"show", :controller=>"jobs"}
+           edit_job GET    /job/:id/edit(.:format)              {:action=>"edit", :controller=>"jobs"}
                     PUT    /job/:id(.:format)                   {:action=>"update", :controller=>"jobs"}
                     DELETE /job/:id(.:format)                   {:action=>"destroy", :controller=>"jobs"}
+            new_job GET    /job/new(.:format)                   {:action=>"new", :controller=>"jobs"}
+          job_items GET    /job/:job_id/items(.:format)         {:action=>"index", :controller=>"job_items"}
+                    POST   /job/:job_id/items(.:format)         {:action=>"create", :controller=>"job_items"}
+           job_item GET    /job/:job_id/item/:id(.:format)      {:action=>"show", :controller=>"items"}
+      edit_job_item GET    /job/:job_id/item/:id/edit(.:format) {:action=>"edit", :controller=>"items"}
+                    PUT    /job/:job_id/item/:id(.:format)      {:action=>"update", :controller=>"items"}
+                    DELETE /job/:job_id/item/:id(.:format)      {:action=>"destroy", :controller=>"items"}
+       new_job_item GET    /job/:job_id/item/new(.:format)      {:action=>"new", :controller=>"items"}
