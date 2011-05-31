@@ -32,8 +32,8 @@
                     PUT    /job/:id(.:format)                   {:action=>"update", :controller=>"jobs"}
                     DELETE /job/:id(.:format)                   {:action=>"destroy", :controller=>"jobs"}
             new_job GET    /job/new(.:format)                   {:action=>"new", :controller=>"jobs"}
-          job_items GET    /job/:job_id/items(.:format)         {:action=>"index", :controller=>"job_items"}
-                    POST   /job/:job_id/items(.:format)         {:action=>"create", :controller=>"job_items"}
+          job_items GET    /job/:job_id/items(.:format)         {:action=>"index", :controller=>"items"}
+                    POST   /job/:job_id/items(.:format)         {:action=>"create", :controller=>"items"}
            job_item GET    /job/:job_id/item/:id(.:format)      {:action=>"show", :controller=>"items"}
       edit_job_item GET    /job/:job_id/item/:id/edit(.:format) {:action=>"edit", :controller=>"items"}
                     PUT    /job/:job_id/item/:id(.:format)      {:action=>"update", :controller=>"items"}
