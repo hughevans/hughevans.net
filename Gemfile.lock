@@ -3,11 +3,18 @@ GEM
   specs:
     RedCloth (4.2.7)
     haml (3.0.25)
-    rack (1.2.2)
-    sinatra (1.2.3)
-      rack (~> 1.1)
-      tilt (< 2.0, >= 1.2.2)
-    tilt (1.2.2)
+    mustermann (2.0.2)
+      ruby2_keywords (~> 0.0.1)
+    rack (2.2.4)
+    rack-protection (2.2.3)
+      rack
+    ruby2_keywords (0.0.5)
+    sinatra (2.2.3)
+      mustermann (~> 2.0)
+      rack (~> 2.2)
+      rack-protection (= 2.2.3)
+      tilt (~> 2.0)
+    tilt (2.0.11)
 
 PLATFORMS
   ruby
@@ -15,4 +22,4 @@ PLATFORMS
 DEPENDENCIES
   RedCloth (= 4.2.7)
   haml (= 3.0.25)
-  sinatra (= 1.2.3)
+  sinatra (= 2.2.3)
